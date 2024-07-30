@@ -5,12 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.*;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, Integer>{
+public interface AccountRepository extends CrudRepository<Account, Integer>{
 
-    @Query("INSERT INTO Account(username) VALUES(?1)")
-    public List<String> registerUser(String name);
+    @Query("SELECT * FROM Account")
+    Account registerUser(String name);
 }
