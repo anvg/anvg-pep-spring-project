@@ -12,5 +12,5 @@ import java.util.*;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-
+    String findUserByUsername(String username);
 }

@@ -20,9 +20,13 @@ public class AccountService {
 
     public Account registerUser(Account account){
         Account addUser = new Account();
-        addUser.setUsername(account.getUsername());
-        addUser.setPassword(account.getPassword());
-        accountRepository.save(account);
+        String searchUser = accountRepository.findUserByUsername(account.getUsername());
+        
+        if(searchUser != null){
+            addUser.setUsername(account.getUsername());
+            addUser.setPassword(account.getPassword());
+            accountRepository.save(account);
+        }
         
         return addUser;
     }
