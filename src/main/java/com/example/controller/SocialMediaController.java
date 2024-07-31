@@ -2,6 +2,8 @@ package com.example.controller;
 
 import com.example.entity.Account;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +21,28 @@ import com.example.service.AccountService;
  @Controller
 public class SocialMediaController {
 
+    AccountService accountService;
+
+    @Autowired
+    SocialMediaController(AccountService accountService){
+        this.accountService = accountService;
+    }
+
     @PostMapping("/register")
     public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
-        AccountService accountService = new AccountService();
 
-        ResponseEntity<Account> target = accountService.registerUser(account);
 
-        return ResponseEntity.status(409).body(null);
+        Account target = accountService.registerUser(account);
+
+        if(target != null){
+            return new ResponseEntity<Account>(HttpStatus.OK);
+        }
+
+        return new ResponseEntity<Account>(HttpStatus.CONFLICT);
     }
 
     @PostMapping("/login")
     public @ResponseBody void loginUserHandler(@RequestBody Account account){
-        AccountService accountService = new AccountService();
         // boolean isValidCredential = accountService.loginUser(account);
 
         // if(isValidCredential){

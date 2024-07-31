@@ -13,27 +13,23 @@ import java.util.*;
 @Service
 public class AccountService {
 
-    @Autowired
+    // @Autowired
     AccountRepository accountRepository;
     
-    // @Autowired
-    // AccountService(AccountRepository accountRepository){
-    //     this.accountRepository = accountRepository;
-    // }
+    @Autowired
+    AccountService(AccountRepository accountRepository){
+        this.accountRepository = accountRepository;
+    }
 
-    public ResponseEntity<Account> registerUser(Account account){
-        Account addUser = new Account();
+    public Account registerUser(Account account){
+        Account addUser = null;
         Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
-        ResponseEntity<Account> responseBody = null;
         
-        if(!optionalAccount.isPresent()){
-            accountRepository.save(account);
-            responseBody = ResponseEntity.status(200).body(account);
-        }else{
-            responseBody = ResponseEntity.status(409).body(null);
+        if(optionalAccount.isPresent()){
+            addUser = account;
         }
         
-        return responseBody;
+        return addUser;
     }
 
     public boolean loginUser(Account account){
