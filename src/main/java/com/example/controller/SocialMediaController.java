@@ -19,11 +19,11 @@ import com.example.service.AccountService;
  @Controller
 public class SocialMediaController {
 
-    // @PostMapping("/register")
-    // public @ResponseBody ResponseEntity<Account> registerUserHandler(@PathVariable String username){
-    //     AccountService accountService = new AccountService();
-    //     Account target = accountService.registerUser(username);
+    @PostMapping("/register")
+    public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
+        AccountService accountService = new AccountService();
+        Account target = accountService.registerUser(account);
 
-    //     return ResponseEntity.status(409).body(null);
-    // }
+        return ResponseEntity.status(409).body(target);
+    }
 }

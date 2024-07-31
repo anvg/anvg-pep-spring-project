@@ -11,8 +11,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.*;
 
 @Repository
-public interface AccountRepository extends CrudRepository<Account, Integer>{
+public interface AccountRepository extends JpaRepository<Account, Integer>{
 
-    @Query("SELECT * FROM Account")
-    Account registerUser(String name);
 }
