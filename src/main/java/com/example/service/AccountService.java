@@ -29,7 +29,7 @@ public class AccountService {
             addUser = account;
         }
         
-        return addUser;
+        return account;
     }
 
     public boolean loginUser(Account account){

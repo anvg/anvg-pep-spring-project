@@ -31,14 +31,15 @@ public class SocialMediaController {
     @PostMapping("/register")
     public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
 
-
         Account target = accountService.registerUser(account);
+        final boolean VALID_USERNAME = account.getUsername().length() != 0;
+        final boolean PASSWORD_4_CHARACTER_MINIMUN = account.getPassword().length() >= 4;
 
-        if(target != null){
-            return new ResponseEntity<Account>(HttpStatus.OK);
+        if(target != null && VALID_USERNAME && PASSWORD_4_CHARACTER_MINIMUN){
+            return new ResponseEntity<Account>(account, HttpStatus.OK);
         }
 
-        return new ResponseEntity<Account>(HttpStatus.CONFLICT);
+        return new ResponseEntity<Account>(account, HttpStatus.CONFLICT);
     }
 
     @PostMapping("/login")
