@@ -12,8 +12,17 @@ public class MessageService {
     MessageRepository messageRepository;
 
     public Message createMessage(Message message){
-        final boolean IS_EMPTY_MESSAGE = message.getMessageText().length() == 0;
         
-        return null;
+        final boolean MESSAGE_HAS_CONTENT = message.getMessageText().length() > 0;
+        final boolean MESSAGE_BELOW_CHARACTER_LIMIT = 
+        message.getMessageText().length() <= 255;
+
+        if(MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
+            ;
+        }else{
+            message = null;
+        }
+        
+        return message;
     }
 }
