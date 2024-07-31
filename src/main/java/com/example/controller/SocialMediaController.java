@@ -20,17 +20,18 @@ import com.example.service.AccountService;
 public class SocialMediaController {
 
     @PostMapping("/register")
-    public @ResponseBody void registerUserHandler(@RequestBody Account account){
+    public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
         AccountService accountService = new AccountService();
-        // Account target = accountService.registerUser(account);
 
-        // return ResponseEntity.status(409).body(null);
+        ResponseEntity<Account> target = accountService.registerUser(account);
+
+        return ResponseEntity.status(409).body(null);
     }
 
     @PostMapping("/login")
     public @ResponseBody void loginUserHandler(@RequestBody Account account){
         AccountService accountService = new AccountService();
-        boolean isValidCredential = accountService.loginUser(account);
+        // boolean isValidCredential = accountService.loginUser(account);
 
         // if(isValidCredential){
         //     return ResponseEntity.status(200).body(null);
