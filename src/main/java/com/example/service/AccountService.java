@@ -26,8 +26,10 @@ public class AccountService {
         //isPresent is true if username already exist
         //isPresent is false if username doesn't exist, in that case save that information
         
-        if(!optionalAccount.isPresent()){
-            accountRepository.save(account);
+        if(optionalAccount.isPresent()){
+            account = null;
+        }else{
+            return accountRepository.save(account);
         }
         
         return account;

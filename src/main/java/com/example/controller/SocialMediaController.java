@@ -38,7 +38,7 @@ public class SocialMediaController {
         //if target doesn't exist that mean username doesn't exist
 
         
-        if(account.equals(target)){
+        if(target == null){
             return new ResponseEntity<Account>(account, HttpStatus.CONFLICT);
         }
 
