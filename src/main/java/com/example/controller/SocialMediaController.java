@@ -26,4 +26,16 @@ public class SocialMediaController {
 
         // return ResponseEntity.status(409).body(null);
     }
+
+    @PostMapping("/login")
+    public @ResponseBody void loginUserHandler(@RequestBody Account account){
+        AccountService accountService = new AccountService();
+        boolean isValidCredential = accountService.loginUser(account);
+
+        // if(isValidCredential){
+        //     return ResponseEntity.status(200).body(null);
+        // }
+            
+        // return ResponseEntity.status(401).body(null);
+    }
 }

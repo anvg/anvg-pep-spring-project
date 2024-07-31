@@ -20,14 +20,26 @@ public class AccountService {
 
     public Account registerUser(Account account){
         Account addUser = new Account();
-        String searchUser = accountRepository.findUserByUsername(account.getUsername());
+        Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
         
-        if(searchUser != null){
+        if(optionalAccount.isPresent()){
             addUser.setUsername(account.getUsername());
             addUser.setPassword(account.getPassword());
             accountRepository.save(account);
         }
         
         return addUser;
+    }
+
+    // public boolean loginUser(Account account){
+    //     boolean loginSuccess = false;
+    //     String username = accountRepository.findByUsername(account.getUsername());
+    //     String password = accountRepository.findByPassword(account.getPassword());
+
+    //     // if(username != null && password != null){
+    //     //     loginSuccess = true;
+    //     // }
+
+    //     return loginSuccess;
     }
 }

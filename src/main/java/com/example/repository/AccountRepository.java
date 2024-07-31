@@ -13,7 +13,8 @@ import java.util.*;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 
-    String findUserByUsername(String username);
+    Optional<Account> findByUsername(String username);
+    Optional<Account> findByPassword(String password);
     
     Optional<Account> findByUsernameAndPassword(String username, String password);
 
