@@ -35,15 +35,17 @@ public class AccountService {
         return account;
     }
 
-    public boolean loginUser(Account account){
-        boolean loginSuccess = false;
-        Optional<Account> optionalUsername = accountRepository.findByUsername(account.getUsername());
-        Optional<Account> optionalPassword = accountRepository.findByPassword(account.getPassword());
+    public Account loginUser(Account account){
+        Optional<Account> optionalLogin = accountRepository.findByUsernameAndPassword(
+            account.getUsername(), account.getPassword());
+        Account target = null;
 
-        if(optionalUsername.isPresent() && optionalPassword.isPresent()){
-            loginSuccess = true;
+        if(optionalLogin.isPresent()){
+            target = account;
+            target.setAccountId(optionalLogin.get().getAccountId());
+            target = accountRepository.save(target);
         }
 
-        return loginSuccess;
+        return target;
     }
 }

@@ -50,13 +50,13 @@ public class SocialMediaController {
     }
 
     @PostMapping("/login")
-    public @ResponseBody void loginUserHandler(@RequestBody Account account){
-        // boolean isValidCredential = accountService.loginUser(account);
+    public @ResponseBody ResponseEntity<Account> loginUserHandler(@RequestBody Account account){
+        Account target = accountService.loginUser(account);
 
-        // if(isValidCredential){
-        //     return ResponseEntity.status(200).body(null);
-        // }
+        if(target != null){
+            return new ResponseEntity<Account>(target, HttpStatus.OK);
+        }
             
-        // return ResponseEntity.status(401).body(null);
+        return new ResponseEntity<Account>(target, HttpStatus.UNAUTHORIZED);
     }
 }
