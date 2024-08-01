@@ -56,4 +56,19 @@ public class MessageService {
 
         return target;
     }
+
+    public Integer deleteMessageById(int id){
+        
+        final Integer ONE_ROW_DELETED = 1;
+        Integer deletedMessage = null;
+        boolean messageExists = messageRepository.existsById(id);
+        
+
+        if(messageExists){
+            deleteMessageById(id);
+            deletedMessage = ONE_ROW_DELETED;
+        }
+
+        return deletedMessage;
+    }
 }
