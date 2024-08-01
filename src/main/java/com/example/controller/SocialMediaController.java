@@ -115,8 +115,11 @@ public class SocialMediaController {
     }
 
     @GetMapping("/accounts/{accountId}/messages")
-    public @ResponseBody ResponseEntity<List<Message>> retrieveAllMessageByUserHandler(@PathVariable int accountId, Message message){
-        List<Message> messageList = messageService.retrieveAllByMessageByUser(accountId, message);
+    public @ResponseBody ResponseEntity<List<Message>> 
+    retrieveAllMessageByUserHandler(@PathVariable int accountId, 
+    Message message){
+        List<Message> messageList = 
+        messageService.retrieveAllByMessageByUser(accountId, message);
 
         return new ResponseEntity<>(messageList, HttpStatus.OK);
     }
