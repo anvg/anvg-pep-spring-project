@@ -38,16 +38,13 @@ public class SocialMediaController {
     public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
 
         Account target = accountService.registerUser(account);
-        
-        if(target == null){
-            return new ResponseEntity<Account>(account, HttpStatus.CONFLICT);
-        }
+        ResponseEntity<Account> responseEntity  = new ResponseEntity<Account>(account, HttpStatus.CONFLICT);
 
         if(target != null){
-            return new ResponseEntity<Account>(account, HttpStatus.OK);
+            responseEntity = new ResponseEntity<Account>(account, HttpStatus.OK);
         }
 
-        return new ResponseEntity<Account>(account, HttpStatus.CONFLICT);
+        return responseEntity;
     }
 
     @PostMapping("/login")
