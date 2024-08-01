@@ -22,14 +22,12 @@ public class AccountService {
     }
 
     public Account registerUser(Account account){
-        Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername()); //find if username exist
-        //isPresent is true if username already exist
-        //isPresent is false if username doesn't exist, in that case save that information
+        Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
         
         if(optionalAccount.isPresent()){
             account = null;
         }else{
-            return accountRepository.save(account);
+            account = accountRepository.save(account);
         }
         
         return account;
