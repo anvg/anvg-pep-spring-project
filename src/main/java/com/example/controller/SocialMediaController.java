@@ -110,6 +110,11 @@ public class SocialMediaController {
     public @ResponseBody ResponseEntity<Message> updatedMessageById(@RequestBody Message message, @PathVariable int messageId){
         return null;
     }
+
+    @GetMapping("/accounts/{accountId}/messages")
+    public @ResponseBody ResponseEntity<List<Message>> retrieveAllMessageByUserHandler(@PathVariable int accountId, Message message){
+        return null;
+    }
     
     
 }
