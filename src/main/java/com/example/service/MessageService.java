@@ -39,4 +39,10 @@ public class MessageService {
         
         return message;
     }
+
+    public List<Message> retrieveAllMessages(){
+        List<Message> messageList = messageRepository.findAll();
+
+        return messageList;
+    }
 }

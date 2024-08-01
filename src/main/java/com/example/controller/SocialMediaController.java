@@ -13,6 +13,8 @@ import com.example.repository.AccountRepository;
 import com.example.service.AccountService;
 import com.example.service.MessageService;
 
+import java.util.*;
+
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller using Spring. The endpoints you will need can be
  * found in readme.md as well as the test cases. You be required to use the @GET/POST/PUT/DELETE/etc Mapping annotations
@@ -80,6 +82,13 @@ public class SocialMediaController {
         }
         
         return reponseEntity;
+    }
+
+    @GetMapping("/messages")
+    public @ResponseBody ResponseEntity<List<Message>> retrieveAllMessageHandler(){
+        List<Message> resultList = messageService.retrieveAllMessages();
+
+        return new ResponseEntity<List<Message>>(resultList, HttpStatus.OK);
     }
     
 }
