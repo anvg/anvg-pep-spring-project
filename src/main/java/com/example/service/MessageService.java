@@ -74,18 +74,19 @@ public class MessageService {
 
     public Message updateMessageById(Message body, int messageId){
         Optional<Message> existingMessage = messageRepository.findById(messageId);
+        Message target = null;
         final boolean MESSAGE_HAS_CONTENT = body.getMessageText().length() > 0;
-        final boolean MESSAGE_UNDER_255_CHARACTER_LIMIT = 
+        final boolean MESSAGE_255_CHARACTER_LIMIT_EXCEEDED = 
         body.getMessageText().length() <= 255;
 
-        if(MESSAGE_HAS_CONTENT && MESSAGE_UNDER_255_CHARACTER_LIMIT){
+        if(MESSAGE_HAS_CONTENT && MESSAGE_255_CHARACTER_LIMIT_EXCEEDED){
             if(existingMessage.isPresent()){
                 existingMessage.get().setMessageText(body.getMessageText());
-                return messageRepository.save(existingMessage.get());
+                target = messageRepository.save(existingMessage.get());
             }
         }
 
-        return null;
+        return target;
     }
 
     public List<Message> retrieveAllByMessageByUser(int accountId, Message message){
