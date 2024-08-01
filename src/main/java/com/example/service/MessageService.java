@@ -59,14 +59,15 @@ public class MessageService {
 
     public Integer deleteMessageById(int id){
         
-        final Integer ONE_ROW_DELETED = 1;
         Integer deletedMessage = null;
         boolean messageExists = messageRepository.existsById(id);
+        Message target = null;
         
 
         if(messageExists){
+            target = messageRepository.findById(id).get();
             deleteMessageById(id);
-            deletedMessage = ONE_ROW_DELETED;
+            deletedMessage = 1;
         }
 
         return deletedMessage;

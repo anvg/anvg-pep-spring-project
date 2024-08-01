@@ -97,6 +97,14 @@ public class SocialMediaController {
 
         return new ResponseEntity<>(target, HttpStatus.OK);
     }
+
+    @DeleteMapping("/messages/{messageId}")
+    public @ResponseBody ResponseEntity<Message> deleteMessageById(@PathVariable int messageId){
+        Integer target = messageService.deleteMessageById(messageId);
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+        
+    }
     
     
 }
