@@ -22,11 +22,15 @@ public class AccountService {
 
     public Account registerUser(Account account){
         Optional<Account> optionalAccount = accountRepository.findByUsername(account.getUsername());
-        
-        if(optionalAccount.isPresent()){
-            account = null;
-        }else{
-            account = accountRepository.save(account);
+        final boolean VALID_USERNAME = account.getUsername().length() != 0;
+        final boolean PASSWORD_4_CHARACTER_MINIMUN = account.getPassword().length() >= 4;
+
+        if(VALID_USERNAME && PASSWORD_4_CHARACTER_MINIMUN){
+            if(optionalAccount.isPresent()){
+                account = null;
+            }else{
+                account = accountRepository.save(account);
+            }
         }
         
         return account;
