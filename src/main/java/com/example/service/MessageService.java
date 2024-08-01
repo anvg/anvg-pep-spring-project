@@ -89,7 +89,7 @@ public class MessageService {
         return target;
     }
 
-    public List<Message> retrieveAllByMessageByUser(int accountId, Message message){
+    public List<Message> retrieveAllByMessageByUser(int accountId){
         Optional<Account> optionalAccount = accountRepository.findById(accountId);
         Optional<List<Message>> messageList = null;
 
