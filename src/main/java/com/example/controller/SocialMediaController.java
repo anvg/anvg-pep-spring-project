@@ -105,6 +105,11 @@ public class SocialMediaController {
         return new ResponseEntity<>(null, HttpStatus.OK);
         
     }
+
+    @PatchMapping("/messages/{messageId}")
+    public @ResponseBody ResponseEntity<Message> updatedMessageById(@RequestBody Message message, @PathVariable int messageId){
+        return null;
+    }
     
     
 }
