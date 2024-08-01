@@ -1,11 +1,13 @@
 package com.example.service;
 
 import com.example.repository.MessageRepository;
+import com.example.repository.AccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
+import com.example.entity.Account;
 
 import java.util.*;
 
@@ -13,10 +15,12 @@ import java.util.*;
 public class MessageService {
 
     MessageRepository messageRepository;
+    AccountRepository accountRepository;
 
     @Autowired
-    MessageService(MessageRepository messageRepository){
+    MessageService(MessageRepository messageRepository, AccountRepository accountRepository){
         this.messageRepository = messageRepository;
+        this.accountRepository = accountRepository;
     }
 
     public Message createMessage(Message message){
@@ -87,5 +91,17 @@ public class MessageService {
         }
 
         return null;
+    }
+
+    public List<Message> retrieveAllByMessageByUser(int accountId, Message message){
+        Optional<Account> optionalAccount = accountRepository.findById(accountId);
+        Optional<Message> messageAccount;
+
+        if(optionalAccount.isPresent()){
+            messageAccount = messageRepository.findByPostedBy(accountId);
+        }
+        
+        return null;
+
     }
 }
