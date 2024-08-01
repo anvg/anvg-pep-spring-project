@@ -35,8 +35,7 @@ public class MessageService {
 
         if(optionalMessage.isPresent() && 
         MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
-            optionalMessage.get().setMessageText(message.getMessageText());
-            return messageRepository.save(optionalMessage.get());
+            return messageRepository.save(message);
         }else{
             message = null;
         }

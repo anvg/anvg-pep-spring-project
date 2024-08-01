@@ -75,10 +75,10 @@ public class SocialMediaController {
     public @ResponseBody ResponseEntity<Message> createMessageHandler(@RequestBody Message message){
         Message target = messageService.createMessage(message);
         ResponseEntity<Message> reponseEntity = 
-        new ResponseEntity<Message>(HttpStatus.BAD_REQUEST);
+        new ResponseEntity<Message>(target, HttpStatus.BAD_REQUEST);
 
         if(target != null){
-            reponseEntity = new ResponseEntity<Message>(HttpStatus.OK);
+            reponseEntity = new ResponseEntity<Message>(target, HttpStatus.OK);
         }
         
         return reponseEntity;
