@@ -47,8 +47,13 @@ public class MessageService {
     }
 
     public Message retrieveAllMessagesById(int id){
-        Optional<Message> mesasgeListById = messageRepository.findByMessageId(id);
+        Optional<Message> messageListById = messageRepository.findByMessageId(id);
+        Message target = null;
 
-        return mesasgeListById.get();
+        if(messageListById.isPresent()){
+            target = messageListById.get();
+        }
+
+        return target;
     }
 }
