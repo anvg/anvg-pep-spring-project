@@ -95,13 +95,13 @@ public class MessageService {
 
     public List<Message> retrieveAllByMessageByUser(int accountId, Message message){
         Optional<Account> optionalAccount = accountRepository.findById(accountId);
-        Optional<Message> messageAccount;
+        Optional<List<Message>> messageList = null;
 
         if(optionalAccount.isPresent()){
-            messageAccount = messageRepository.findByPostedBy(accountId);
+            messageList = messageRepository.findAllByPostedBy(accountId);
         }
         
-        return null;
+        return messageList.get();
 
     }
 }
