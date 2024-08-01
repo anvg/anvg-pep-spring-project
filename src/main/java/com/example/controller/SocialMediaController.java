@@ -88,7 +88,7 @@ public class SocialMediaController {
     }
 
     @DeleteMapping("/messages/{messageId}")
-    public @ResponseBody ResponseEntity<Integer> deleteMessageById(@PathVariable int messageId){
+    public @ResponseBody ResponseEntity<Integer> deleteMessageByIdHandler(@PathVariable int messageId){
         boolean isDeleted = messageService.deleteMessageById(messageId);
         final Integer ONE_MESSAGE_DELETED = 1;
         ResponseEntity<Integer> responseEntity = new ResponseEntity<>(HttpStatus.OK);
@@ -102,7 +102,7 @@ public class SocialMediaController {
     }
 
     @PatchMapping("/messages/{messageId}")
-    public @ResponseBody ResponseEntity<Integer> updatedMessageById(@RequestBody Message message, @PathVariable int messageId){
+    public @ResponseBody ResponseEntity<Integer> updatedMessageByIdHandler(@RequestBody Message message, @PathVariable int messageId){
         Message target = messageService.updateMessageById(message, messageId);
         final Integer ONE_MESSAGE_UPDATED = 1;
         ResponseEntity<Integer> responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
