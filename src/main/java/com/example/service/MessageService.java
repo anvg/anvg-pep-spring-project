@@ -3,13 +3,19 @@ package com.example.service;
 import com.example.repository.MessageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
 
+@Service
 public class MessageService {
 
-    @Autowired
     MessageRepository messageRepository;
+
+    @Autowired
+    MessageService(MessageRepository messageRepository){
+        this.messageRepository = messageRepository;
+    }
 
     public Message createMessage(Message message){
         
@@ -18,7 +24,7 @@ public class MessageService {
         message.getMessageText().length() <= 255;
 
         if(MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
-            ;
+            message = messageRepository.save(message);
         }else{
             message = null;
         }

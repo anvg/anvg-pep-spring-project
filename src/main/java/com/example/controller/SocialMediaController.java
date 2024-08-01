@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.Account;
+import com.example.entity.Message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.repository.AccountRepository;
 import com.example.service.AccountService;
+import com.example.service.MessageService;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller using Spring. The endpoints you will need can be
@@ -22,11 +24,18 @@ import com.example.service.AccountService;
 public class SocialMediaController {
 
     AccountService accountService;
+    MessageService messageService;
 
     @Autowired
-    SocialMediaController(AccountService accountService){
+    SocialMediaController(AccountService accountService, MessageService messageService){
         this.accountService = accountService;
+        this.messageService = messageService;
     }
+
+    // @Autowired
+    // SocialMediaController(MessageService messageService){
+    //     this.messageService = messageService;
+    // }
 
     @PostMapping("/register")
     public @ResponseBody ResponseEntity<Account> registerUserHandler(@RequestBody Account account){
@@ -59,5 +68,14 @@ public class SocialMediaController {
             
         return new ResponseEntity<Account>(target, HttpStatus.UNAUTHORIZED);
     }
+
+    // @PostMapping("/messages")
+    // public @ResponseBody void createMessageHandler(@RequestBody Message message){
+    //     Message target = messageService.createMessage(message);
+    //     ResponseEntity<Message> reponseEntity = 
+    //     new ResponseEntity<Message>(HttpStatus.BAD_REQUEST);
+        
+    //     return reponseEntity;
+    // }
     
 }
