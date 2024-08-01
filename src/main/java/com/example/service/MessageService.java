@@ -45,4 +45,10 @@ public class MessageService {
 
         return messageList;
     }
+
+    public Message retrieveAllMessagesById(int id){
+        Optional<Message> mesasgeListById = messageRepository.findByMessageId(id);
+
+        return mesasgeListById.get();
+    }
 }
