@@ -69,13 +69,17 @@ public class SocialMediaController {
         return new ResponseEntity<Account>(target, HttpStatus.UNAUTHORIZED);
     }
 
-    // @PostMapping("/messages")
-    // public @ResponseBody void createMessageHandler(@RequestBody Message message){
-    //     Message target = messageService.createMessage(message);
-    //     ResponseEntity<Message> reponseEntity = 
-    //     new ResponseEntity<Message>(HttpStatus.BAD_REQUEST);
+    @PostMapping("/messages")
+    public @ResponseBody ResponseEntity<Message> createMessageHandler(@RequestBody Message message){
+        Message target = messageService.createMessage(message);
+        ResponseEntity<Message> reponseEntity = 
+        new ResponseEntity<Message>(HttpStatus.BAD_REQUEST);
+
+        if(target != null){
+            reponseEntity = new ResponseEntity<Message>(HttpStatus.OK);
+        }
         
-    //     return reponseEntity;
-    // }
+        return reponseEntity;
+    }
     
 }

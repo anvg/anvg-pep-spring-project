@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
 
+import java.util.*;
+
 @Service
 public class MessageService {
 
@@ -19,11 +21,17 @@ public class MessageService {
 
     public Message createMessage(Message message){
         
+        Optional<Message> optionalMessage = 
+        messageRepository.findByPostedBy(message.getPostedBy());
+        final int TOTAL_RECORDS = (int) messageRepository.count();
         final boolean MESSAGE_HAS_CONTENT = message.getMessageText().length() > 0;
         final boolean MESSAGE_BELOW_CHARACTER_LIMIT = 
         message.getMessageText().length() <= 255;
 
-        if(MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
+
+        if(optionalMessage.isPresent() && 
+        MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
+            message.setMessageId(TOTAL_RECORDS + 1);
             message = messageRepository.save(message);
         }else{
             message = null;
