@@ -35,12 +35,12 @@ public class MessageService {
 
         if(optionalMessage.isPresent() && 
         MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
-            message.setMessageId(TOTAL_RECORDS + 1);
-            message = messageRepository.save(message);
+            optionalMessage.get().setMessageText(message.getMessageText());
+            return messageRepository.save(optionalMessage.get());
         }else{
             message = null;
         }
-        
+
         return message;
     }
 
@@ -86,7 +86,7 @@ public class MessageService {
         if(MESSAGE_HAS_CONTENT && MESSAGE_UNDER_255_CHARACTER_LIMIT){
             if(existingMessage.isPresent()){
                 existingMessage.get().setMessageText(body.getMessageText());
-                return messageRepository.save(body);
+                return messageRepository.save(existingMessage.get());
             }
         }
 
