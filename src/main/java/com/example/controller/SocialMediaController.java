@@ -99,10 +99,15 @@ public class SocialMediaController {
     }
 
     @DeleteMapping("/messages/{messageId}")
-    public @ResponseBody ResponseEntity<Message> deleteMessageById(@PathVariable int messageId){
-        Integer target = messageService.deleteMessageById(messageId);
+    public @ResponseBody ResponseEntity<Integer> deleteMessageById(@PathVariable int messageId){
+        boolean isDeleted = messageService.deleteMessageById(messageId);
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        
+        if(isDeleted){
+            return new ResponseEntity<>(1, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
         
     }
 
@@ -113,6 +118,7 @@ public class SocialMediaController {
         if(target != null){
             return new ResponseEntity<>(1, HttpStatus.OK);
         }
+
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 

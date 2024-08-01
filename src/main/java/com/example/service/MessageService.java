@@ -61,20 +61,19 @@ public class MessageService {
         return target;
     }
 
-    public Integer deleteMessageById(int id){
+    public boolean deleteMessageById(int id){
         
-        Integer deletedMessage = null;
-        boolean messageExists = messageRepository.existsById(id);
+        boolean messageIsDeleted = false;
+        Optional<Message> messageExists = messageRepository.findById(id);
         Message target = null;
         
 
-        if(messageExists){
-            target = messageRepository.findById(id).get();
-            deleteMessageById(id);
-            deletedMessage = 1;
+        if(messageExists.isPresent()){
+            messageRepository.deleteById(id);
+            messageIsDeleted = true;
         }
 
-        return deletedMessage;
+        return messageIsDeleted;
     }
 
     public Message updateMessageById(Message body, int messageId){
