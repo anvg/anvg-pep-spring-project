@@ -27,7 +27,6 @@ public class MessageService {
         
         Optional<Message> optionalMessage = 
         messageRepository.findByPostedBy(message.getPostedBy());
-        final int TOTAL_RECORDS = (int) messageRepository.count();
         final boolean MESSAGE_HAS_CONTENT = message.getMessageText().length() > 0;
         final boolean MESSAGE_BELOW_CHARACTER_LIMIT = 
         message.getMessageText().length() <= 255;
@@ -35,7 +34,7 @@ public class MessageService {
 
         if(optionalMessage.isPresent() && 
         MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
-            return messageRepository.save(message);
+            message = messageRepository.save(message);
         }else{
             message = null;
         }
