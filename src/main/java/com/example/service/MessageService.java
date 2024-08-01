@@ -60,10 +60,8 @@ public class MessageService {
     }
 
     public boolean deleteMessageById(int id){
-        
         boolean messageIsDeleted = false;
         Optional<Message> messageExists = messageRepository.findById(id);
-        Message target = null;
         
 
         if(messageExists.isPresent()){
