@@ -50,12 +50,14 @@ public class SocialMediaController {
     @PostMapping("/login")
     public @ResponseBody ResponseEntity<Account> loginUserHandler(@RequestBody Account account){
         Account target = accountService.loginUser(account);
+        ResponseEntity<Account> responseEntity = 
+        new ResponseEntity<>(target, HttpStatus.UNAUTHORIZED);
 
         if(target != null){
-            return new ResponseEntity<Account>(target, HttpStatus.OK);
+            responseEntity = new ResponseEntity<Account>(target, HttpStatus.OK);
         }
             
-        return new ResponseEntity<Account>(target, HttpStatus.UNAUTHORIZED);
+        return responseEntity;
     }
 
     @PostMapping("/messages")
