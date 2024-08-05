@@ -34,7 +34,7 @@ public class MessageService {
 
         if(optionalMessage.isPresent() && 
         MESSAGE_HAS_CONTENT && MESSAGE_BELOW_CHARACTER_LIMIT){
-            // message = messageRepository.save(message);
+            message = messageRepository.save(message);
         }else{
             message = null;
         }
